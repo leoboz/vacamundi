@@ -13,18 +13,11 @@
       align-items: center;
       padding: 20px;
     }
-    .image-container {
-      position: relative;
+    svg {
       width: 800px;
       height: auto;
-    }
-    .layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
+      border: 1px solid #ccc;
+      background-color: #fff;
     }
     .controls {
       margin-top: 20px;
@@ -32,15 +25,33 @@
     .controls label {
       margin-right: 15px;
     }
+    .cut {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    .cut:hover {
+      opacity: 1;
+      stroke: #000;
+      stroke-width: 1px;
+    }
   </style>
 </head>
 <body>
-  <h1>Comparador de Cortes de Carne</h1>
-  <div class="image-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Cortes_bovinos_BR.svg" class="layer" id="br" />
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Cortes_res_Argentina.svg" class="layer" id="ar" />
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/US_Beef_Cuts.svg" class="layer" id="us" />
-  </div>
+  <h1>Comparador de Cortes de Carne (Protótipo SVG)</h1>
+
+  <svg viewBox="0 0 800 500">
+    <!-- Silhueta simples da vaca -->
+    <path d="M 100 400 Q 150 300 200 300 Q 250 200 300 200 Q 350 100 450 100 Q 500 150 550 200 Q 600 300 650 300 Q 700 350 700 400 Z" fill="#eee" stroke="#aaa" stroke-width="2" />
+
+    <!-- Corte BRASIL (exemplo fictício) -->
+    <polygon id="br" class="cut" fill="red" points="150,350 200,320 250,340 220,380" />
+
+    <!-- Corte ARGENTINA (exemplo fictício) -->
+    <polygon id="ar" class="cut" fill="blue" points="220,380 250,340 300,360 270,400" />
+
+    <!-- Corte EUA (exemplo fictício) -->
+    <polygon id="us" class="cut" fill="green" points="300,360 330,330 370,350 340,390" />
+  </svg>
 
   <div class="controls">
     <label><input type="checkbox" checked onchange="toggleLayer('br')" /> Brasil</label>
@@ -51,7 +62,7 @@
   <script>
     function toggleLayer(id) {
       const el = document.getElementById(id);
-      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      el.style.display = el.style.display === 'none' ? 'inline' : 'none';
     }
   </script>
 </body>
